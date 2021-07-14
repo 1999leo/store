@@ -1,0 +1,57 @@
+1、说说你认为 Python3 和 Python2 之间的区别？（京东测试开发面试）
+
+python2的默认编码是ASCII,python3的默认编码是Unicode
+python2中range返回的是列表，xrange返回的是可迭代对象，而Python3中range返回的是可迭代对象
+python2中整数分为int 和 lang，python3中统一归为int
+python2不等于可以用！= 或者<>表示，在python3中只能用！=
+python2 使用print语句，python3中使用print()函数
+python2 输入用row_input() ,python3用input()
+
+2、判断下列变量命名是否合法
+标识符	是否合法    	标识符	 是否合法
+char	  是        Cy%ty	    否
+Oax_li	  否	    $123        否
+fLul	  是	    3_3 	    否
+BYTE	  是	    T_T	        是
+
+
+3、有以下两个数，使用+，-号实现两个数的调换。
+A=56
+B=78
+实现效果：
+A=78
+B=56
+
+代码实现
+A=A+B
+B=A-B
+A=A-B
+
+4、定义两个变量stu1和stu2，分别存储45和23，并用print()打印两个数的和
+
+stu1=45
+stu2=23
+print(stu1+stu2)
+
+5、定义5个变量，并用print()打印5个数的和、平均值
+
+num1=10
+num2=11
+num3=13
+num4=14
+num5=15
+print("和:",num1+num2+num3+num4+num5)
+print("平均数:",(num1+num2+num3+num4+num5)/5)
+
+
+
+定义一个变量num1,并赋值45.然后将num1值赋值给num2。打印出来。
+
+num1=45
+num2=num1
+print(num2)
+
+
+
+
+
