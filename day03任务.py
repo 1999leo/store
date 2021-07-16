@@ -54,6 +54,7 @@ while True:
                     data = random.randint(1, 10)  # 重新获取随机数
                 else:
                     print("输入错误退出游戏!")
+                    break
     except:
         print("输入非法重新输入!")
         pass
