@@ -16,34 +16,44 @@
 import random
 
 # 1. 让系统产生一个随机数
-data = random.randint(0, 200)  # 22
+data = random.randint(0, 10)  # 22
 # 初始化次数
 count = 0
-# 初始化金币 2000
+# 初始化金币 20001
+
 gold = 2000
 
 while True:
-    if gold == 0 or count == 10:
-        print("金币不足/次数用尽，强制退出游戏")
-        break
-
-    count += 1
-    num = input("请输入您要猜的数字：")
-    num = int(num)
-
-    if num > data:
-        gold -= 200
-        print("大了！所剩金币:", gold)
-    elif num < data:
-        gold -= 200
-        print("小了！所剩金币:", gold)
-    else:
-        gold += 5000
-        print("恭喜，猜中了！本次幸运数字为：", data, "，本次猜了", count, "次！", "所剩金币为:", gold)
-        wn = input("是否继续游戏（y/n）：")
-        if wn == "n":
-            print("ByeBye!")
+    try:
+        if gold == 0 or count == 10:
+            print("金币不足/次数用尽，强制退出游戏")
             break
+
         else:
-            count = 0  # 次数重置
-            num = random.randint(1, 200)  # 重新获取随机数
+            count += 1
+            num = input("请输入您要猜的数字：")
+            num = int(num)
+
+            if num > data:
+                gold -= 200
+                print("大了！所剩金币:", gold)
+            elif num < data:
+                gold -= 200
+                1
+                print("小了！所剩金币:", gold)
+            else:
+                gold -= 200
+                gold += 5000
+                print("恭喜，猜中了！本次幸运数字为：", data, "，本次猜了", count, "次！", "所剩金币为:", gold)
+                yon = input("是否继续游戏（y/n）：")
+                if yon == "n":
+                    print("ByeBye!")
+                    break
+                elif yon == "y":
+                    count = 0  # 次数重置
+                    data = random.randint(1, 10)  # 重新获取随机数
+                else:
+                    print("输入错误退出游戏!")
+    except:
+        print("输入非法重新输入!")
+        pass
