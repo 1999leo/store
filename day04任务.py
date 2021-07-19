@@ -43,7 +43,7 @@ while True:
     if extract == "y":
         if coupon <= 10:
             print("恭喜你抽到一张7折老干妈优惠券!")
-        elif coupon > 10:
+        else:
             print("恭喜你抽到一张联想电脑1折优惠券!")
         break
     elif extract == "n":
