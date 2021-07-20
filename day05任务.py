@@ -1,8 +1,6 @@
 import random
 
 # 1.准备商品
-
-
 shop = [
     ["劳力士手表", 200000],
     ["Iphone 12X plus", 12000],
@@ -122,7 +120,6 @@ def shopping(extract):
     print("本次余额还剩：￥", money)
 
 
-
 # 打印城市
 def print_place(choice):
     for i in choice:
@@ -158,7 +155,7 @@ while True:
         else:
             print("当前二级城市不存在，别瞎弄！")
     elif city1 == 'q' or city1 == "Q":
-        print("------------------欢迎下次光临Jason旅行社！------------------")
+        print("------------------欢迎下次光临Leo旅行社！------------------")
         break
     else:
         print("当前城市不存在，别瞎弄！")
