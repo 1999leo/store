@@ -225,9 +225,6 @@ def transferMoney():
             if data == 1:
                 print('您输入的账号不存在！')
                 transferMoney()
-            elif data == 1:
-                print('您要转入的账号不存在！')
-                transferMoney()
             elif data == 2:
                 print('您输入的密码不正确！')
                 transferMoney()
