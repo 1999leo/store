@@ -193,19 +193,15 @@ def drawMoney():
             data = bank_drawMoney(account, pwd, dm)
             if data == 1:
                 print("您输入的账号不存在！")
-                drawMoney()
             elif data == 2:
                 print("您输入的密码错误！")
-                drawMoney()
             elif data == 3:
                 print("您的账号余额不足！")
-                drawMoney()
             else:
                 bank[account]["money"] = bank[account]["money"] - dm
                 print("取钱成功，您的当前余额为:", bank[account]["money"], "元！")
         else:
             print("金额输入错误，请重新输入！")
-            drawMoney()
     else:
         print("账号输入错误，请重新输入！")
         drawMoney()
@@ -224,20 +220,16 @@ def transferMoney():
             data = bank_transferMoney(account, intoAccount, pwd, tm)
             if data == 1:
                 print('您输入的账号不存在！')
-                transferMoney()
             elif data == 2:
                 print('您输入的密码不正确！')
-                transferMoney()
             elif data == 3:
                 print('您的账号余额不足！')
-                transferMoney()
             else:
                 bank[account]['money'] = bank[account]['money'] - tm
                 bank[intoAccount]['money'] = bank[intoAccount]['money'] + tm
                 print('转账成功，您的账号当前余额为：', bank[account]['money'], '元！')
         else:
             print('您输入的要转入的账号格式错误！')
-            transferMoney()
     else:
         print('您输入的账号格式错误！')
         transferMoney()
