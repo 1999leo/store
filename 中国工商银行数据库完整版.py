@@ -13,6 +13,7 @@ cursor = con.cursor()
 # 银行名称
 bank_name = "中国工商银行昌平回龙观支行"  # 银行名称写死的
 
+
 # 入口程序
 def welcome():
     print("*************************************")
@@ -88,17 +89,19 @@ def bank_transferMoney(account, intoAccount, pwd, tm):
     if record is None:
         return 1
     # 判断转出账户密码的对错
-    if record[2] != pwd:
+    elif record[2] != pwd:
         return 2
     # 判断转账金额大于转出账户的余额
-    if record[7] < tm:
-        sql = "UPDATE `user` SET money=money-%s WHERE account=%s " \
-              "UPDATE `user` SET money=money+%s WHERE account=%s "
-        data = [tm, account, tm, intoAccount]
-        cursor.execute(sql, data)  # (模板, 参数)
-        con.commit()
+    elif record[7] < tm:
         return 3
-
+    else:
+        sql = "UPDATE `user` SET money=money-%s WHERE account=%s "
+        sql1="UPDATE `user` SET money=money+%s WHERE account=%s "
+        data = [tm, account]
+        data1 = [tm, intoAccount]
+        cursor.execute(sql, data)
+        cursor.execute(sql1,data1)
+        con.commit()
 
 # 银行的查询逻辑
 def bank_userQuery(account, pwd):
@@ -201,7 +204,7 @@ def saveMoney():
             else:
                 cursor.execute("SELECT * FROM `user` where account = %s " % account)
                 record = cursor.fetchone()
-                
+
                 print('存钱成功，您当前余额为', record[7], '元！')
         else:
             print('金额输入错误，请重新输入！')
