@@ -13,7 +13,6 @@ cursor = con.cursor()
 # 银行名称
 bank_name = "中国工商银行昌平回龙观支行"  # 银行名称写死的
 
-
 # 入口程序
 def welcome():
     print("*************************************")
@@ -32,7 +31,7 @@ def welcome():
 def bank_addUser(account, username, password, country, province, street, gate, money, registerDate):
     # 1.判断数据库是否已满
     cursor.execute("SELECT * from user")
-    record = cursor.fetchone()
+    record = cursor.fetchall()
     if len(record) >= 100:
         return 3
     else:
@@ -69,12 +68,11 @@ def bank_drawMoney(account, pwd, dm):
     # 判断账户是否在字典中
     cursor.execute("SELECT * FROM `user` where account = %s" % account)
     record = cursor.fetchone()
-    li = [record]
     if record is None:
         return 1
-    if li[0][2] != pwd:
+    if record[2] != pwd:
         return 2
-    if li[0][7] < dm:
+    if record[7] < dm:
         return 3
     sql = "UPDATE `user` SET money = money - %s WHERE account = %s"
     data = [dm, account]
@@ -86,15 +84,14 @@ def bank_drawMoney(account, pwd, dm):
 def bank_transferMoney(account, intoAccount, pwd, tm):
     cursor.execute("SELECT * FROM `user` where account = %s" % account)
     record = cursor.fetchone()
-    li = [record]
     # 判断账户是否在数据库中
     if record is None:
         return 1
     # 判断转出账户密码的对错
-    if li[0][2] != pwd:
+    if record[2] != pwd:
         return 2
     # 判断转账金额大于转出账户的余额
-    if li[0][7] < tm:
+    if record[7] < tm:
         sql = "UPDATE `user` SET money=money-%s WHERE account=%s " \
               "UPDATE `user` SET money=money+%s WHERE account=%s "
         data = [tm, account, tm, intoAccount]
@@ -107,11 +104,11 @@ def bank_transferMoney(account, intoAccount, pwd, tm):
 def bank_userQuery(account, pwd):
     cursor.execute("SELECT * FROM `user` where account = %s" % account)
     record = cursor.fetchone()
-    li = [record]
+
     if record is None:
         print('您输入的账号不存在！')
     else:
-        if li[0][2] != pwd:
+        if record[2] != pwd:
             print('您输入的密码不正确！')
         else:
             sql = "SELECT * FROM `user` WHERE account=%s AND `password`=%s"
@@ -134,8 +131,8 @@ def bank_userQuery(account, pwd):
                         注册日期：%s
                         ---------------------------
                     '''
-            print(info % (li[0][1], li[0][2], li[0][0], li[0][3], li[0][4], li[0][5], li[0][6], li[0][7],
-                          li[0][8], li[0][9]))
+            print(info % (record[1], record[2], record[0], record[3], record[4], record[5], record[6], record[7],
+                          record[8], record[9]))
 
 
 # 用户的开户的操作逻辑
@@ -204,8 +201,8 @@ def saveMoney():
             else:
                 cursor.execute("SELECT * FROM `user` where account = %s " % account)
                 record = cursor.fetchone()
-                li = [record]
-                print('存钱成功，您当前余额为', li[0][7], '元！')
+                
+                print('存钱成功，您当前余额为', record[7], '元！')
         else:
             print('金额输入错误，请重新输入！')
     else:
@@ -233,7 +230,7 @@ def drawMoney():
                 cursor.execute("SELECT * FROM `user` where account = %s" % account)
                 record = cursor.fetchone()
                 li = [record]
-                print('取钱成功，您的当前余额为', li[0][7], '元！')
+                print('取钱成功，您的当前余额为', record[7], '元！')
         else:
             print("金额输入错误，请重新输入！")
     else:
@@ -262,7 +259,7 @@ def transferMoney():
                 cursor.execute("SELECT * FROM `user` where account = %s" % account)
                 record = cursor.fetchone()
                 li = [record]
-                print('转账成功，您的账号当前余额为：', li[0][7], '元！')
+                print('转账成功，您的账号当前余额为：', record[7], '元！')
         else:
             print('您输入的要转入的账号格式错误！')
     else:
