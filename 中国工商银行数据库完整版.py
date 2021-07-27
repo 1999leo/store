@@ -299,6 +299,5 @@ while True:
         break
     else:
         print("输入错误！请重新输入！")
-
 cursor.close()
 con.close()
