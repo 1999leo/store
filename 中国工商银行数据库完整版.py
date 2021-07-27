@@ -1,4 +1,6 @@
 import random
+import time
+
 import pymysql
 
 # 准备一个数据库和银行名称
@@ -27,24 +29,25 @@ def welcome():
 
 
 # 银行的开户逻辑
-def bank_addUser(account, username, password, country, province, street, gate, money):
+def bank_addUser(account, username, password, country, province, street, gate, money, registerDate):
     # 1.判断数据库是否已满
     cursor.execute("SELECT * from user")
     record = cursor.fetchone()
     if len(record) >= 100:
         return 3
-    # 2.判断用户是否存在
-    cursor.execute("SELECT * from user where account = %s" % account)
-    record1 = cursor.fetchone()
-    if record1 is not None:
-        return 2
     else:
-        # 3.正常开户
-        sql = "insert into  user values(%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-        data = [account, username, password, country, province, street, gate, money, bank_name]
-        cursor.execute(sql, data)
-        con.commit()
-        return 1
+        # 2.判断用户是否存在
+        cursor.execute("SELECT * from user where account = %s" % account)
+        record1 = cursor.fetchone()
+        if record1 is not None:
+            return 2
+        else:
+            # 3.正常开户
+            sql = "insert into  user values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+            a = [account, username, password, country, province, street, gate, money, bank_name, registerDate]
+            cursor.execute(sql, a)
+            con.commit()
+            return 1
 
 
 # 银行的存钱逻辑
@@ -77,6 +80,7 @@ def bank_drawMoney(account, pwd, dm):
     data = [dm, account]
     cursor.execute(sql, data)
     con.commit()
+
 
 # 银行的转账逻辑
 def bank_transferMoney(account, intoAccount, pwd, tm):
@@ -127,10 +131,11 @@ def bank_userQuery(account, pwd):
                             门牌号: %s
                         余额：%s
                         开户行地址：%s
+                        注册日期：%s
                         ---------------------------
                     '''
             print(info % (li[0][1], li[0][2], li[0][0], li[0][3], li[0][4], li[0][5], li[0][6], li[0][7],
-                          li[0][8]))
+                          li[0][8], li[0][9]))
 
 
 # 用户的开户的操作逻辑
@@ -158,8 +163,8 @@ def addUser():
         else:
             print("输入非法,重新输入")
     account = random.randint(10000000, 99999999)  # 随机产生8为数字
-
-    status = bank_addUser(account, username, password, country, province, street, gate, money)
+    registerDate = time.strftime('%Y-%m-%d %H:%M:%S')  # 获取系统时间
+    status = bank_addUser(account, username, password, country, province, street, gate, money, registerDate)
 
     if status == 3:
         print("对不起，用户库已满，请携带证件到其他银行办理！")
@@ -179,9 +184,10 @@ def addUser():
                 门牌号: %s
             余额：%s
             开户行地址：%s
+            注册日期：%s
             --------------------------
         '''
-        print(info % (username, password, account, country, province, street, gate, money, bank_name))
+        print(info % (username, password, account, country, province, street, gate, money, bank_name, registerDate))
 
 
 # 用户的存钱操作逻辑
