@@ -94,3 +94,5 @@ for key, value in enumerate(quarterly):
 print("每种衣服的销量占比".center(25, "-"))
 for key, value in enumerate(clothes):
     print(value, "的销售量占比为", round((100 * ct[key]) / ts, 2), "%")
+
+    
