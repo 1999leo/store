@@ -78,3 +78,5 @@ print("风衣销售额占比:", round(c / sum1 * 100, 2), "%")
 print("皮草销售额占比:", round(d / sum1 * 100, 2), "%")
 print("T恤销售额占比:", round(e / sum1 * 100, 2), "%")
 print("衬衫销售额占比:", round(f / sum1 * 100, 2), "%")
+
+
