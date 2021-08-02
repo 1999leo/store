@@ -80,12 +80,12 @@ class Chef:
         print("正在蒸饭...")
 
 
-class Son(Chef):
+class Sub(Chef):
     def cook(self):
         print("正在炒菜...")
 
 
-class Grandson(Son):
+class Grandson(Sub):
     def steamedRice(self):
         print("蒸饭")
 
