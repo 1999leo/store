@@ -108,3 +108,5 @@ print("以下是您的购物小条，请拿好：")
 for key, value in enumerate(myCart):
     print(key, value)
 print("本次余额还剩：￥", money)
+
+
