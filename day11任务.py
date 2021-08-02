@@ -147,8 +147,10 @@ class Student(Person):
 
     def study(self):
         print("我是学生中，我叫{}，性别{}，今年{}岁，学号是{}, 正在学习中...".format(
-            super().getName(), super().getSex(),
-            super().getAge(), self.__id)
+            super().getName(),
+            super().getSex(),
+            super().getAge(),
+            self.__id)
         )
 
 
