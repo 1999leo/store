@@ -125,6 +125,7 @@ def print_place(choice):
         print(i)
 
 
+        
 # 攻略
 for i in data:
     print(i)
