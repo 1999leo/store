@@ -33,6 +33,7 @@ while True:
             count += 1
             num = input("请输入您要猜的数字：")
             num = int(num)
+            
 
             if num > data:
                 gold -= 200
