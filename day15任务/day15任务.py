@@ -70,7 +70,8 @@ for i in range(length):
     else:
         register.write(li[i])
 register.write("\n")
-
+register.flush()
+register.close()
 """
 现在有这样一个叫scores.txt的文件，里面有赫敏、哈利、罗恩、马尔福四个人的几次魔法作业的成绩。
 但是呢，因为有些魔法作业有一定难度，教授不强制同学们必须上交，所以大家上交作业的次数并不一致。
